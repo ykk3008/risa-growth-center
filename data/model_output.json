@@ -1,0 +1,883 @@
+{
+  "fest": {
+    "name": "CampusFest 2027",
+    "city": "Mumbai",
+    "dates": "6-7 March 2027",
+    "t14": "2027-02-20",
+    "start": "2026-11-26"
+  },
+  "baseline_2025": {
+    "dedup": {
+      "interactions_raw": 953,
+      "interactions": 950,
+      "qualification_raw": 434,
+      "qualification": 433,
+      "opp_history_raw": 230,
+      "opp_history": 228
+    },
+    "channels": [
+      {
+        "campaign": "Brand Discovery Email",
+        "group": "cold",
+        "brands": 91,
+        "attempts": 224,
+        "replied_brands": 34,
+        "meeting_brands": 7,
+        "qualified": 7,
+        "opps": 11,
+        "confirmed": 0,
+        "confirmed_inr": 0,
+        "open_pipeline_inr": 490000
+      },
+      {
+        "campaign": "Brand Leader LinkedIn",
+        "group": "cold",
+        "brands": 37,
+        "attempts": 54,
+        "replied_brands": 30,
+        "meeting_brands": 10,
+        "qualified": 10,
+        "opps": 12,
+        "confirmed": 0,
+        "confirmed_inr": 0,
+        "open_pipeline_inr": 530000
+      },
+      {
+        "campaign": "Creator Network Referrals",
+        "group": "warm/inbound",
+        "brands": 19,
+        "attempts": 21,
+        "replied_brands": 19,
+        "meeting_brands": 15,
+        "qualified": 15,
+        "opps": 9,
+        "confirmed": 9,
+        "confirmed_inr": 785000,
+        "open_pipeline_inr": 0
+      },
+      {
+        "campaign": "Partner Interest Form",
+        "group": "warm/inbound",
+        "brands": 17,
+        "attempts": 18,
+        "replied_brands": 17,
+        "meeting_brands": 13,
+        "qualified": 13,
+        "opps": 7,
+        "confirmed": 7,
+        "confirmed_inr": 670000,
+        "open_pipeline_inr": 0
+      },
+      {
+        "campaign": "Past Conversation Revival",
+        "group": "cold",
+        "brands": 20,
+        "attempts": 44,
+        "replied_brands": 10,
+        "meeting_brands": 7,
+        "qualified": 7,
+        "opps": 10,
+        "confirmed": 0,
+        "confirmed_inr": 0,
+        "open_pipeline_inr": 420000
+      },
+      {
+        "campaign": "Warm Partner Introductions",
+        "group": "warm/inbound",
+        "brands": 8,
+        "attempts": 9,
+        "replied_brands": 8,
+        "meeting_brands": 8,
+        "qualified": 8,
+        "opps": 9,
+        "confirmed": 8,
+        "confirmed_inr": 785000,
+        "open_pipeline_inr": 0
+      }
+    ],
+    "warm": {
+      "brands": 44,
+      "attempts": 48,
+      "replied_brands": 44,
+      "meeting_brands": 36,
+      "qualified": 36,
+      "opps": 25,
+      "confirmed": 24,
+      "confirmed_inr": 2240000,
+      "open_pipeline_inr": 0
+    },
+    "cold": {
+      "brands": 148,
+      "attempts": 322,
+      "replied_brands": 74,
+      "meeting_brands": 24,
+      "qualified": 24,
+      "opps": 33,
+      "confirmed": 0,
+      "confirmed_inr": 0,
+      "open_pipeline_inr": 1440000
+    },
+    "warm_meeting_rate": 0.8181818181818182,
+    "warm_opp_per_meeting": 0.6944444444444444,
+    "warm_close_rate_brand": 0.5454545454545454,
+    "cold_meeting_rate": 0.16216216216216217,
+    "cold_close_rate_brand": 0.0,
+    "confirmed_deals": 24,
+    "confirmed_inr": 2240000,
+    "confirmed_cash_inr": 2000000,
+    "cash_share_value": 0.8928571428571429,
+    "avg_deal_inr": 93333.33333333333,
+    "median_cycle_days": 10.0,
+    "qualified_brands": 60,
+    "targets": {
+      "qualified": 55,
+      "confirmed": 28
+    }
+  },
+  "status_quo_cash_by_T14_lakh": 14.1,
+  "base": {
+    "segments": [
+      {
+        "segment": "A. Anchor (title / co-title / associate)",
+        "key": "A",
+        "bet": "anchor",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 20,
+            "meetings": 8.0,
+            "proposals": 5.6,
+            "signed": 1.3439999999999999,
+            "hours": 117.11999999999999
+          },
+          {
+            "channel": "Cold ABM (anchors only)",
+            "prospects": 30,
+            "meetings": 3.5999999999999996,
+            "proposals": 2.1599999999999997,
+            "signed": 0.25919999999999993,
+            "hours": 75.45599999999999
+          }
+        ],
+        "uncapped_deals": 1.6031999999999997,
+        "deals": 1.6031999999999997,
+        "slots": 3,
+        "avg_deal_lakh": 14.0,
+        "signed_value_lakh": 22.444799999999997,
+        "cash_by_T14_lakh": 13.164548543999997,
+        "paid_by_T14": 0.7,
+        "hours": 192.57599999999996,
+        "warm_share": 0.8383233532934132
+      },
+      {
+        "segment": "B. Unbundled vertical titles (hackathon, nights, arena, summit)",
+        "key": "B",
+        "bet": "verticals",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 30,
+            "meetings": 12.0,
+            "proposals": 8.399999999999999,
+            "signed": 2.6879999999999997,
+            "hours": 113.856
+          },
+          {
+            "channel": "Inbound / sponsor store",
+            "prospects": 10,
+            "meetings": 6.0,
+            "proposals": 4.199999999999999,
+            "signed": 1.5119999999999998,
+            "hours": 46.943999999999996
+          },
+          {
+            "channel": "Cold ABM (anchors only)",
+            "prospects": 40,
+            "meetings": 4.8,
+            "proposals": 2.88,
+            "signed": 0.4608,
+            "hours": 84.2496
+          }
+        ],
+        "uncapped_deals": 4.660799999999999,
+        "deals": 4.660799999999999,
+        "slots": 6,
+        "avg_deal_lakh": 6.0,
+        "signed_value_lakh": 27.964799999999997,
+        "cash_by_T14_lakh": 17.3147974272,
+        "paid_by_T14": 0.78,
+        "hours": 245.0496,
+        "warm_share": 0.576725025746653
+      },
+      {
+        "segment": "C. Category partners (fintech app, beverage, mobility, devices, edtech)",
+        "key": "C",
+        "bet": "store",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 40,
+            "meetings": 16.0,
+            "proposals": 11.2,
+            "signed": 4.4799999999999995,
+            "hours": 108.80000000000001
+          },
+          {
+            "channel": "Inbound / sponsor store",
+            "prospects": 40,
+            "meetings": 24.0,
+            "proposals": 16.799999999999997,
+            "signed": 7.559999999999999,
+            "hours": 119.39999999999999
+          }
+        ],
+        "uncapped_deals": 12.04,
+        "deals": 12.04,
+        "slots": 20,
+        "avg_deal_lakh": 2.0,
+        "signed_value_lakh": 24.08,
+        "cash_by_T14_lakh": 15.344859599999998,
+        "paid_by_T14": 0.85,
+        "hours": 228.2,
+        "warm_share": 0.37209302325581395
+      },
+      {
+        "segment": "D. Long tail (stalls, small D2C, local brands)",
+        "key": "D",
+        "bet": "store",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 40,
+            "meetings": 16.0,
+            "proposals": 11.2,
+            "signed": 4.4799999999999995,
+            "hours": 88.64
+          },
+          {
+            "channel": "Inbound / sponsor store",
+            "prospects": 40,
+            "meetings": 24.0,
+            "proposals": 16.799999999999997,
+            "signed": 7.559999999999999,
+            "hours": 87.47999999999999
+          }
+        ],
+        "uncapped_deals": 12.04,
+        "deals": 12.04,
+        "slots": 40,
+        "avg_deal_lakh": 0.9,
+        "signed_value_lakh": 10.836,
+        "cash_by_T14_lakh": 7.311374280000001,
+        "paid_by_T14": 0.9,
+        "hours": 176.12,
+        "warm_share": 0.37209302325581395
+      },
+      {
+        "segment": "E. Hybrid performance packages (guaranteed fee only)",
+        "key": "E",
+        "bet": "hybrid",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 10,
+            "meetings": 4.0,
+            "proposals": 2.8,
+            "signed": 1.1199999999999999,
+            "hours": 31.119999999999997
+          },
+          {
+            "channel": "Cold ABM (anchors only)",
+            "prospects": 20,
+            "meetings": 2.4,
+            "proposals": 1.44,
+            "signed": 0.288,
+            "hours": 39.648
+          }
+        ],
+        "uncapped_deals": 1.408,
+        "deals": 1.408,
+        "slots": 6,
+        "avg_deal_lakh": 2.0,
+        "signed_value_lakh": 2.816,
+        "cash_by_T14_lakh": 1.00279872,
+        "paid_by_T14": 0.85,
+        "hours": 70.768,
+        "warm_share": 0.7954545454545454
+      }
+    ],
+    "deals": 31.752,
+    "signed_value_lakh": 88.1416,
+    "cash_by_T14_lakh": 54.1383785712,
+    "prospects": 320,
+    "hours_needed": 912.7135999999999,
+    "hours_available": 1080,
+    "utilisation": 0.8451051851851851,
+    "hours_by_bet": {
+      "store": 305.6,
+      "warm": 229.768,
+      "verticals": 188.1216,
+      "anchor": 134.016,
+      "hybrid": 55.208
+    }
+  },
+  "stretch": {
+    "segments": [
+      {
+        "segment": "A. Anchor (title / co-title / associate)",
+        "key": "A",
+        "bet": "anchor",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 25,
+            "meetings": 12.5,
+            "proposals": 9.375,
+            "signed": 2.8125,
+            "hours": 188.00634080275796
+          },
+          {
+            "channel": "Cold ABM (anchors only)",
+            "prospects": 40,
+            "meetings": 7.199999999999999,
+            "proposals": 4.68,
+            "signed": 0.8423999999999999,
+            "hours": 128.98365919724205
+          }
+        ],
+        "uncapped_deals": 3.6549,
+        "deals": 3,
+        "slots": 3,
+        "avg_deal_lakh": 15.3,
+        "signed_value_lakh": 45.900000000000006,
+        "cash_by_T14_lakh": 31.665078900000005,
+        "paid_by_T14": 0.78,
+        "hours": 316.99,
+        "warm_share": 0.7695148978084215
+      },
+      {
+        "segment": "B. Unbundled vertical titles (hackathon, nights, arena, summit)",
+        "key": "B",
+        "bet": "verticals",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 35,
+            "meetings": 17.5,
+            "proposals": 13.125,
+            "signed": 5.25,
+            "hours": 163.55729321079158
+          },
+          {
+            "channel": "Inbound / sponsor store",
+            "prospects": 15,
+            "meetings": 10.5,
+            "proposals": 7.875,
+            "signed": 3.4650000000000007,
+            "hours": 84.62281351912245
+          },
+          {
+            "channel": "Cold ABM (anchors only)",
+            "prospects": 50,
+            "meetings": 9.0,
+            "proposals": 5.8500000000000005,
+            "signed": 1.4040000000000001,
+            "hours": 125.21989327008598
+          }
+        ],
+        "uncapped_deals": 10.119,
+        "deals": 8,
+        "slots": 8,
+        "avg_deal_lakh": 6.5,
+        "signed_value_lakh": 52.0,
+        "cash_by_T14_lakh": 37.858184,
+        "paid_by_T14": 0.85,
+        "hours": 373.4,
+        "warm_share": 0.5188259709457457
+      },
+      {
+        "segment": "C. Category partners (fintech app, beverage, mobility, devices, edtech)",
+        "key": "C",
+        "bet": "store",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 45,
+            "meetings": 22.5,
+            "proposals": 16.875,
+            "signed": 8.4375,
+            "hours": 153.0737704918033
+          },
+          {
+            "channel": "Inbound / sponsor store",
+            "prospects": 50,
+            "meetings": 35.0,
+            "proposals": 26.25,
+            "signed": 14.437500000000002,
+            "hours": 189.42622950819674
+          }
+        ],
+        "uncapped_deals": 22.875,
+        "deals": 22,
+        "slots": 22,
+        "avg_deal_lakh": 2.2,
+        "signed_value_lakh": 48.400000000000006,
+        "cash_by_T14_lakh": 35.68783680000001,
+        "paid_by_T14": 0.9,
+        "hours": 342.5,
+        "warm_share": 0.36885245901639346
+      },
+      {
+        "segment": "D. Long tail (stalls, small D2C, local brands)",
+        "key": "D",
+        "bet": "store",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 50,
+            "meetings": 25.0,
+            "proposals": 18.75,
+            "signed": 9.375,
+            "hours": 134.375
+          },
+          {
+            "channel": "Inbound / sponsor store",
+            "prospects": 50,
+            "meetings": 35.0,
+            "proposals": 26.25,
+            "signed": 14.437500000000002,
+            "hours": 137.0625
+          }
+        ],
+        "uncapped_deals": 23.8125,
+        "deals": 23.8125,
+        "slots": 40,
+        "avg_deal_lakh": 1.0,
+        "signed_value_lakh": 23.8125,
+        "cash_by_T14_lakh": 18.14346765,
+        "paid_by_T14": 0.93,
+        "hours": 271.4375,
+        "warm_share": 0.3937007874015748
+      },
+      {
+        "segment": "E. Hybrid performance packages (guaranteed fee only)",
+        "key": "E",
+        "bet": "hybrid",
+        "lines": [
+          {
+            "channel": "Warm intro",
+            "prospects": 15,
+            "meetings": 7.5,
+            "proposals": 5.625,
+            "signed": 2.8125,
+            "hours": 60.0
+          },
+          {
+            "channel": "Cold ABM (anchors only)",
+            "prospects": 30,
+            "meetings": 5.3999999999999995,
+            "proposals": 3.51,
+            "signed": 1.053,
+            "hours": 69.94800000000001
+          }
+        ],
+        "uncapped_deals": 3.8655,
+        "deals": 3.8655,
+        "slots": 10,
+        "avg_deal_lakh": 2.2,
+        "signed_value_lakh": 8.504100000000001,
+        "cash_by_T14_lakh": 4.061583672300001,
+        "paid_by_T14": 0.9,
+        "hours": 129.948,
+        "warm_share": 0.7275902211874272
+      }
+    ],
+    "deals": 60.678,
+    "signed_value_lakh": 178.6166,
+    "cash_by_T14_lakh": 127.41615102230001,
+    "prospects": 405,
+    "hours_needed": 1434.2755,
+    "hours_available": 1536,
+    "utilisation": 0.9337731119791667,
+    "hours_by_bet": {
+      "store": 470.2131147540984,
+      "warm": 349.5062022526764,
+      "verticals": 291.62135339460417,
+      "anchor": 222.98682959862103,
+      "hybrid": 99.94800000000001
+    }
+  },
+  "uplift": {
+    "multiple": 3.84,
+    "deals_ratio": 1.32,
+    "avg_signed_ticket_lakh": 2.78,
+    "ticket_ratio": 2.97,
+    "prospects_2025_warm_inbound": 44,
+    "team_2025": 3
+  },
+  "sensitivities": [
+    {
+      "case": "Anchor and vertical tickets halved",
+      "cash_lakh": 38.9,
+      "delta_lakh": -15.2
+    },
+    {
+      "case": "No anchor signs",
+      "cash_lakh": 41.0,
+      "delta_lakh": -13.2
+    },
+    {
+      "case": "Warm intro to meeting 30% instead of 40%",
+      "cash_lakh": 46.6,
+      "delta_lakh": -7.6
+    },
+    {
+      "case": "Collections 10 points slower",
+      "cash_lakh": 47.3,
+      "delta_lakh": -6.8
+    },
+    {
+      "case": "Only the 2025 team of 3 sellers",
+      "cash_lakh": 32.0,
+      "delta_lakh": -22.1
+    }
+  ],
+  "monte_carlo": {
+    "p10": 42.0,
+    "p50": 54.0,
+    "p90": 65.8,
+    "mean": 54.0,
+    "p_at_least_base": 0.5,
+    "p_at_least_stretch_with_base_team": 0.0,
+    "method": "5,000 draws: channel rates x U(0.75,1.25), tickets x U(0.8,1.2), collections +/-8 pts, anchors Binomial(3). Base team only (EST)."
+  },
+  "gates": {
+    "week6_signed_plan_lakh": 46.2,
+    "week6_signed_gate_lakh": 39.2,
+    "week6_signed_share": 0.52,
+    "week9_cash_plan_lakh": 18.76,
+    "week9_cash_gate_lakh": 15.9,
+    "t14_cash_plan_lakh": 54.14,
+    "tolerance": 0.15
+  },
+  "cash_curve": {
+    "base": [
+      0.0,
+      0.0,
+      0.46,
+      1.87,
+      4.53,
+      7.26,
+      10.0,
+      14.38,
+      18.76,
+      37.52,
+      45.83,
+      54.14
+    ],
+    "stretch": [
+      0.0,
+      0.0,
+      1.13,
+      4.5,
+      10.57,
+      16.97,
+      23.38,
+      33.75,
+      44.11,
+      88.22,
+      107.82,
+      127.42
+    ]
+  },
+  "channels": {
+    "Warm intro": {
+      "base": [
+        0.4,
+        0.7,
+        0.4
+      ],
+      "stretch": [
+        0.5,
+        0.75,
+        0.5
+      ],
+      "rationale": "EST anchored on DATA + BENCH. DATA 2025 warm: 36/44 brands met (82%), 24/44 confirmed - small sample, so haircut. BENCH warm intro->meeting 25-40% (vendor, low confidence) - base capped at the top of that range; proposal win 34% (Proposify). Result 11.2 signed per 100 prospects (base) vs vendor range 10-20."
+    },
+    "Inbound / sponsor store": {
+      "base": [
+        0.6,
+        0.7,
+        0.45
+      ],
+      "stretch": [
+        0.7,
+        0.75,
+        0.55
+      ],
+      "rationale": "EST anchored on DATA: 2025 partner form 13/17 met (76%), 7/17 confirmed (41%); haircut for a larger, less self-selected inbound pool."
+    },
+    "Cold ABM (anchors only)": {
+      "base": [
+        0.12,
+        0.6,
+        0.2
+      ],
+      "stretch": [
+        0.18,
+        0.65,
+        0.3
+      ],
+      "rationale": "EST: DATA cold 2025 = 24/148 brands met (16%), 0 confirmed. BENCH 1-3 signed per 100 cold prospects (vendor). Used only as personalised multi-touch outreach to anchor/vertical accounts."
+    }
+  },
+  "segments_meta": [
+    {
+      "key": "A",
+      "name": "A. Anchor (title / co-title / associate)",
+      "bet": "anchor",
+      "deal": [
+        14.0,
+        15.3
+      ],
+      "slots": [
+        3,
+        3
+      ],
+      "size_factor": 0.6,
+      "paid": [
+        0.7,
+        0.78
+      ],
+      "guaranteed": [
+        1.0,
+        1.0
+      ],
+      "tag": "EST ticket: title ~Rs20L, co-title/associate Rs10-13L, avg Rs14L. BENCH public asking cards: IIT ISM title Rs15L (2020), Amity UNIFEST Rs20-40L. Size factor 0.6 (EST): big tickets need more approvals. Prospects 50 (EST) = the fintech/UPI/bank/consumer-tech marketing heads reachable in Mumbai. Paid by T-14 0.70 (EST): anchors sign weeks 7-9 and corporate DSO is 56-75 days (BENCH), so the 50% advance lands but some balances slip."
+    },
+    {
+      "key": "B",
+      "name": "B. Unbundled vertical titles (hackathon, nights, arena, summit)",
+      "bet": "verticals",
+      "deal": [
+        6.0,
+        6.5
+      ],
+      "slots": [
+        6,
+        8
+      ],
+      "size_factor": 0.8,
+      "paid": [
+        0.78,
+        0.85
+      ],
+      "guaranteed": [
+        1.0,
+        1.0
+      ],
+      "tag": "BENCH SIIB Ignisense cultural night Rs5L priced above its Rs4L title; Mood Indigo sold 10 night/competition titles; IIT ISM Gold Rs9L / Silver Rs6L. EST avg Rs6L, 6 slots (2 pro-nights, hackathon, esports arena, summit, fashion night). Size factor 0.8 (EST)."
+    },
+    {
+      "key": "C",
+      "name": "C. Category partners (fintech app, beverage, mobility, devices, edtech)",
+      "bet": "store",
+      "deal": [
+        2.0,
+        2.2
+      ],
+      "slots": [
+        20,
+        22
+      ],
+      "size_factor": 1.0,
+      "paid": [
+        0.85,
+        0.9
+      ],
+      "guaranteed": [
+        1.0,
+        1.0
+      ],
+      "tag": "BENCH IIT ISM category sponsors Rs0.5-3L, IIEST title Rs1.35L. EST avg Rs2L. DATA cash share 89% of 2025 value (in-kind excluded)."
+    },
+    {
+      "key": "D",
+      "name": "D. Long tail (stalls, small D2C, local brands)",
+      "bet": "store",
+      "deal": [
+        0.9,
+        1.0
+      ],
+      "slots": [
+        40,
+        40
+      ],
+      "size_factor": 1.0,
+      "paid": [
+        0.9,
+        0.93
+      ],
+      "guaranteed": [
+        1.0,
+        1.0
+      ],
+      "tag": "DATA 2025 confirmed avg Rs0.93L (Rs35K-2L); BENCH Antaragni'11 median deal Rs49K. Small tickets pay upfront more often (EST paid 0.90)."
+    },
+    {
+      "key": "E",
+      "name": "E. Hybrid performance packages (guaranteed fee only)",
+      "bet": "hybrid",
+      "deal": [
+        2.0,
+        2.2
+      ],
+      "slots": [
+        6,
+        10
+      ],
+      "size_factor": 1.0,
+      "paid": [
+        0.85,
+        0.9
+      ],
+      "guaranteed": [
+        0.5,
+        0.6
+      ],
+      "tag": "Incremental brands that refuse fixed fees (quick-commerce, AI tools, D2C performance teams). Only the GUARANTEED share (50%) counts as T-14 cash; the CPA bonus is paid after the fest and excluded. BENCH college CPL Rs180-900, Blinkit sampling Rs9/unit (vendor)."
+    }
+  ],
+  "cash_factors": {
+    "slippage": {
+      "base": 0.1,
+      "stretch": 0.05,
+      "rationale": "BENCH/EST 10-25% of verbally confirmed value never becomes MoU/payment (vendor, low confidence); MoU-first process keeps it at the low end."
+    },
+    "tds": {
+      "base": 0.02,
+      "stretch": 0.02,
+      "rationale": "BENCH s.194C / s.393(1): 2% TDS on sponsorship (advertising contract) for non-individual payees; GST is pass-through."
+    }
+  },
+  "capacity": {
+    "team": [
+      6,
+      8
+    ],
+    "hours_per_week": [
+      15,
+      16
+    ],
+    "weeks": 12,
+    "team_2025": 3,
+    "tag": "EST: 2025 had 3 deal owners. Base adds 3 sellers (6 x 15 h/week), stretch 8 x 16 h/week; 12 weeks from 26 Nov 2026 to T-14 (20 Feb 2027). Hours = prospects x outreach h (warm 1.0, inbound 0.3, cold ABM 1.5) + meetings x 1.5 h + proposals x segment h + signed deals x segment h (all EST; 2025 median cycle 10 days)."
+  },
+  "bets": [
+    {
+      "key": "warm",
+      "bet": "Warm-network engine (alumni, past sponsors, creators, community)",
+      "segments": "Door-opener for A-E",
+      "confidence": "High",
+      "evidence": "2025 warm channels: 24/44 brands, 100% of value",
+      "cost_items": {
+        "Alumni meetups": 0.4,
+        "Creator gifting": 0.3,
+        "Travel": 0.1
+      },
+      "owner": "1 seller + alumni cell",
+      "timeline": "Weeks 0-12, always on",
+      "cost_lakh": 0.8,
+      "cash_lakh": 15.1,
+      "stretch_cash_lakh": 33.6,
+      "stretch_uplift_lakh": 18.5,
+      "effort_h": 230,
+      "ev_per_100h": 6.23,
+      "rank": 1
+    },
+    {
+      "key": "store",
+      "bet": "Self-serve sponsor store + category bundles + early-pay bonus inventory",
+      "segments": "C-D",
+      "confidence": "High",
+      "evidence": "2025 inbound form 7/17 brands confirmed",
+      "cost_items": {
+        "Package page + payment links": 0.3,
+        "Campus ambassador + social push": 0.5,
+        "Collateral": 0.2
+      },
+      "owner": "1 seller + 1 web dev",
+      "timeline": "Live week 2, promote weeks 2-11",
+      "cost_lakh": 1.0,
+      "cash_lakh": 18.4,
+      "stretch_cash_lakh": 43.7,
+      "stretch_uplift_lakh": 25.2,
+      "effort_h": 306,
+      "ev_per_100h": 5.71,
+      "rank": 2
+    },
+    {
+      "key": "verticals",
+      "bet": "Unbundled vertical titles incl. employer-branding hackathon (HR wallet)",
+      "segments": "B",
+      "confidence": "Medium",
+      "evidence": "Public precedents (Mood Indigo, Techfest, Ignisense); not in 2025 data",
+      "cost_items": {
+        "Hackathon prize seed": 1.0,
+        "Mock-ups and decks": 0.5,
+        "Travel": 0.5
+      },
+      "owner": "2 sellers",
+      "timeline": "Weeks 1-10",
+      "cost_lakh": 2.0,
+      "cash_lakh": 12.3,
+      "stretch_cash_lakh": 28.0,
+      "stretch_uplift_lakh": 15.7,
+      "effort_h": 188,
+      "ev_per_100h": 5.49,
+      "rank": 3
+    },
+    {
+      "key": "anchor",
+      "bet": "Anchor title: fintech/UPI/bank 'closed-loop UPI fest'",
+      "segments": "A",
+      "confidence": "Low",
+      "evidence": "2024-26 title sponsors are fintech/UPI/banks; long approval chains",
+      "cost_items": {
+        "Exec pitch travel": 0.6,
+        "UPI pilot integration": 0.5,
+        "Custom proposal design": 0.4
+      },
+      "owner": "Sponsorship head + 1",
+      "timeline": "Pitch by week 3, MoU by week 9",
+      "cost_lakh": 1.5,
+      "cash_lakh": 7.6,
+      "stretch_cash_lakh": 19.5,
+      "stretch_uplift_lakh": 11.8,
+      "effort_h": 134,
+      "ev_per_100h": 4.59,
+      "rank": 4
+    },
+    {
+      "key": "hybrid",
+      "bet": "Hybrid performance packages (50% guaranteed + capped CPA bonus)",
+      "segments": "E",
+      "confidence": "Low",
+      "evidence": "No 2025 data; CPA pricing benchmarks are vendor-reported",
+      "cost_items": {
+        "Tracking links / MMP setup": 0.3,
+        "DPDP consent flow": 0.2,
+        "Reporting": 0.2
+      },
+      "owner": "1 seller + data lead",
+      "timeline": "Pilot weeks 3-6, scale weeks 7-11",
+      "cost_lakh": 0.7,
+      "cash_lakh": 0.6,
+      "stretch_cash_lakh": 2.6,
+      "stretch_uplift_lakh": 2.0,
+      "effort_h": 55,
+      "ev_per_100h": -0.17,
+      "rank": 5
+    }
+  ]
+}
