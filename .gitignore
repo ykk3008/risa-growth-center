@@ -43,3 +43,6 @@ next-env.d.ts
 # local dev store
 .data/
 !.env.example
+
+# local UI screenshots
+.shots/

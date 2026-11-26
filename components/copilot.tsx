@@ -67,22 +67,22 @@ export function Copilot() {
   return (
     <aside className="flex w-full max-w-[440px] shrink-0 flex-col border-l border-slate-200 bg-white">
       <div className="flex items-center justify-between border-b border-slate-200 px-3 py-2">
-        <div className="flex items-center gap-2 text-sm font-semibold"><Bot size={16} className="text-indigo-600" /> Growth Analyst &amp; Copilot</div>
+        <div className="flex items-center gap-2 text-sm font-semibold"><Bot size={16} className="text-brand-600" /> Growth Analyst &amp; Copilot</div>
         <button title="Clear conversation" onClick={() => setMsgs([])} className="rounded p-1 text-slate-400 hover:bg-slate-100"><Trash2 size={14} /></button>
       </div>
       <div className="flex-1 space-y-3 overflow-y-auto p-3">
         {msgs.length === 0 && (
           <div className="space-y-2">
             <p className="text-xs text-slate-500">Answers come only from live app data via tools (as of <b>{asOf}</b>). It shows the evidence it used, says when data can&apos;t answer, and drafts tasks you confirm.</p>
-            {SUGGESTED.map((q) => <button key={q} onClick={() => ask(q)} className="block w-full rounded-lg border border-slate-200 px-3 py-2 text-left text-xs text-slate-700 hover:border-indigo-300 hover:bg-indigo-50">{q}</button>)}
+            {SUGGESTED.map((q) => <button key={q} onClick={() => ask(q)} className="block w-full rounded-lg border border-slate-200 px-3 py-2 text-left text-xs text-slate-700 hover:border-brand-300 hover:bg-brand-50">{q}</button>)}
           </div>
         )}
         {msgs.map((m, mi) => (
-          <div key={mi} className={m.role === "user" ? "ml-8 rounded-lg bg-indigo-600 px-3 py-2 text-sm text-white" : "mr-2 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-800 ring-1 ring-slate-200"}>
+          <div key={mi} className={m.role === "user" ? "ml-8 rounded-lg bg-brand-600 px-3 py-2 text-sm text-white" : "mr-2 rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-800 ring-1 ring-slate-200"}>
             {m.role === "user" ? m.content : <Markdown text={m.content} />}
             {m.proposals?.map((p, pi) => (
-              <div key={pi} className="mt-2 rounded-lg border border-indigo-200 bg-white p-2 text-xs">
-                <div className="font-semibold text-indigo-700">{p.kind === "task" ? "Proposed task" : "Proposed opportunity update"}</div>
+              <div key={pi} className="mt-2 rounded-lg border border-brand-200 bg-white p-2 text-xs">
+                <div className="font-semibold text-brand-700">{p.kind === "task" ? "Proposed task" : "Proposed opportunity update"}</div>
                 {p.kind === "task" ? (
                   <div className="mt-1 space-y-0.5">
                     <div className="font-medium text-slate-800">{String(p.payload.title)}</div>
@@ -113,8 +113,8 @@ export function Copilot() {
       <form onSubmit={(e) => { e.preventDefault(); void ask(input); }} className="flex gap-2 border-t border-slate-200 p-2">
         <textarea value={input} onChange={(e) => setInput(e.target.value)} rows={2} placeholder="Ask about performance, bottlenecks, forecasts, what to do next…"
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void ask(input); } }}
-          className="flex-1 resize-none rounded-lg border border-slate-300 px-2 py-1.5 text-sm focus:border-indigo-500 focus:outline-none" />
-        <button type="submit" disabled={busy || !input.trim()} className="self-end rounded-lg bg-indigo-600 p-2 text-white disabled:opacity-40"><Send size={16} /></button>
+          className="flex-1 resize-none rounded-lg border border-slate-300 px-2 py-1.5 text-sm focus:border-brand-500 focus:outline-none" />
+        <button type="submit" disabled={busy || !input.trim()} className="self-end rounded-lg bg-brand-600 p-2 text-white disabled:opacity-40"><Send size={16} /></button>
       </form>
     </aside>
   );

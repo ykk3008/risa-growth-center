@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import { useApi, useApp, send } from "@/components/app-context";
-import { Card, Badge, Table, inr, pct, num, Loading, ErrorBox, SimTag, verdictTone, Button, inputCls } from "@/components/ui";
+import { Card, Table, inr, pct, num, Loading, ErrorBox, SimTag, Button, inputCls, PageHeader, VerdictBadge, Notice, tidy } from "@/components/ui";
 
 export default function Campaigns() {
   const { data: d, error, loading } = useApi<any>("/api/dashboard");
@@ -24,38 +24,34 @@ export default function Campaigns() {
 
   return (
     <div className="space-y-4">
-      <div>
-        <h1 className="text-xl font-semibold">Acquisition campaigns</h1>
-        <p className="text-xs text-slate-500">Brand-level funnel per campaign as of {d.meta.as_of}. Rules — SCALE: brand→confirmed ≥ 30% · STOP: ≥ 20 brands & 0 confirmed with ≥ 5 opps, or meeting rate &lt; 10% after ≥ 50 sends · TOO EARLY: &lt; 8 brands · otherwise CHANGE.</p>
-      </div>
-      {msg && <div className="rounded-lg bg-emerald-50 px-3 py-2 text-xs text-emerald-800">{msg}</div>}
-      <Card title="Funnel & verdict by campaign">
-        <Table head={["Campaign", "Owner", "Brands", "Attempts", "Replied", "Met", "Qualified", "Opps", "Confirmed", "Lost", "Confirmed ₹", "Open pipeline", "Brand→conf.", "Weakest step", "Verdict", ""]}>
+      <PageHeader eyebrow="Analyse" title="Acquisition campaigns"
+        subtitle={<>Brand level funnel for each campaign as of {d.meta.as_of}. We scale a campaign when 30% or more of its brands close. We stop it after 20 brands with no close despite 5 deals, or under 10% meetings after 50 sends. Under 8 brands is too early to call. Anything else, we change.</>} />
+      {msg && <Notice tone="green">{msg}</Notice>}
+      <Card title="Funnel and verdict by campaign" subtitle="Distinct brands at each step. The small figure under a count is its rate from the step before.">
+        <Table head={["Campaign", "Verdict", "Close rate", "Confirmed ₹", "Open pipeline", "Brands", "Replied", "Met", "Qualified", "Deals", "Won", "Lost", "Weakest step", ""]} align={["l", "l", "r", "r", "r", "r", "r", "r", "r", "r", "r", "r", "l", "l"]}>
           {d.campaigns.map((c: any) => (
-            <tr key={c.key} className="align-top">
-              <td className="px-2 py-2 font-medium">{c.label}<div className="text-[11px] font-normal text-slate-400">{c.key} · {c.channel}</div></td>
-              <td className="px-2 py-2 text-xs">{c.owner}</td>
-              <td className="px-2 py-2">{c.brands_touched}</td>
-              <td className="px-2 py-2">{c.attempts}</td>
-              <td className="px-2 py-2">{c.brands_replied}<div className="text-[11px] text-slate-400">{pct(c.reply_rate_brand)}</div></td>
-              <td className="px-2 py-2">{c.brands_met}<div className="text-[11px] text-slate-400">{pct(c.meeting_rate_brand)}</div></td>
-              <td className="px-2 py-2">{c.qualified_brands}</td>
-              <td className="px-2 py-2">{c.opportunities}</td>
-              <td className="px-2 py-2 font-semibold">{c.confirmed}</td>
-              <td className="px-2 py-2">{c.lost_or_withdrawn}</td>
-              <td className="px-2 py-2">{inr(c.confirmed_value_inr)}</td>
-              <td className="px-2 py-2">{inr(c.open_pipeline_inr)}</td>
-              <td className="px-2 py-2">{pct(c.close_rate_brand)}</td>
-              <td className="px-2 py-2 text-xs">{c.weakest_step.step}<div className="text-[11px] text-slate-400">{c.weakest_step.n}/{c.weakest_step.d}</div></td>
-              <td className="px-2 py-2"><Badge tone={verdictTone(c.verdict)}>{c.verdict}</Badge><div className="mt-1 max-w-[220px] text-[11px] text-slate-500">{c.reason}</div></td>
-              <td className="px-2 py-2"><button onClick={() => ask(`Diagnose the campaign ${c.label}: what is working, where is the bottleneck, and what should we do?`)} className="text-xs font-medium text-indigo-600 hover:underline">Ask AI</button></td>
+            <tr key={c.key}>
+              <td className="min-w-48 px-2 py-2"><div className="font-semibold text-slate-900">{c.label}</div><div className="whitespace-nowrap text-[11px] text-slate-400">{c.key} · {String(c.channel).replace("_", " ")} · {c.owner}</div></td>
+              <td className="min-w-56 px-2 py-2"><VerdictBadge v={c.verdict} /><div className="mt-1 max-w-[260px] text-[11px] leading-snug text-slate-500">{tidy(c.reason)}</div></td>
+              <td className="px-2 py-2 text-right font-semibold">{pct(c.close_rate_brand)}</td>
+              <td className="px-2 py-2 text-right">{inr(c.confirmed_value_inr)}</td>
+              <td className="px-2 py-2 text-right">{inr(c.open_pipeline_inr)}</td>
+              <td className="px-2 py-2 text-right">{c.brands_touched}<div className="text-[11px] text-slate-400">{c.attempts} sends</div></td>
+              <td className="px-2 py-2 text-right">{c.brands_replied}<div className="text-[11px] text-slate-400">{pct(c.reply_rate_brand)}</div></td>
+              <td className="px-2 py-2 text-right">{c.brands_met}<div className="text-[11px] text-slate-400">{pct(c.meeting_rate_brand)}</div></td>
+              <td className="px-2 py-2 text-right">{c.qualified_brands}</td>
+              <td className="px-2 py-2 text-right">{c.opportunities}</td>
+              <td className="px-2 py-2 text-right font-semibold">{c.confirmed}</td>
+              <td className="px-2 py-2 text-right">{c.lost_or_withdrawn}</td>
+              <td className="min-w-32 px-2 py-2 text-xs">{String(c.weakest_step.step).replace("→", "to")}<div className="text-[11px] text-slate-400">{c.weakest_step.n} of {c.weakest_step.d}</div></td>
+              <td className="px-2 py-2"><button onClick={() => ask(`Diagnose the campaign ${c.label}: what is working, where is the bottleneck, and what should we do?`)} className="whitespace-nowrap text-xs font-medium text-brand-600 hover:underline">Ask AI</button></td>
             </tr>
           ))}
         </Table>
       </Card>
 
       <div className="grid gap-4 xl:grid-cols-2">
-        <Card title={<>Effort & efficiency <SimTag /></>} subtitle="The source dataset has no spend data. Budgets/hours are simulated planning inputs — edit them and the metrics update.">
+        <Card title={<>Effort and efficiency <SimTag /></>} subtitle="The source data has no spend, so budgets and hours are simulated planning inputs. Edit them and the metrics update.">
           <Table head={["Campaign", "Budget ₹", "Hours", "₹ / meeting", "₹ / confirmed", "Confirmed ₹ per hour", ""]}>
             {d.campaigns.map((c: any) => {
               const e = edit[c.key];
@@ -82,8 +78,8 @@ export default function Campaigns() {
                 <Tooltip />
                 <Legend wrapperStyle={{ fontSize: 11 }} />
                 <Bar dataKey="touched" fill="#cbd5e1" name="Touched" />
-                <Bar dataKey="met" fill="#a5b4fc" name="Met" />
-                <Bar dataKey="qualified" fill="#6366f1" name="Qualified" />
+                <Bar dataKey="met" fill="#8eb2fb" name="Met" />
+                <Bar dataKey="qualified" fill="#0053b4" name="Qualified" />
                 <Bar dataKey="confirmed" fill="#059669" name="Confirmed" />
               </BarChart>
             </ResponsiveContainer>
@@ -92,7 +88,7 @@ export default function Campaigns() {
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
-        <Card title="By owner" subtitle="Load vs results — where is seller time going?">
+        <Card title="By owner" subtitle="Load against results. Where is seller time going?">
           <Table head={["Owner", "Brands owned", "Brands touched", "Attempts", "Met", "Opps", "Confirmed", "Confirmed ₹", "Open pipeline", "Open tasks", "Overdue"]}>
             {d.owners.map((o: any) => (
               <tr key={o.key}><td className="px-2 py-1.5 font-medium">{o.label}<span className="ml-1 text-[11px] text-slate-400">{o.key}</span></td><td className="px-2 py-1.5">{o.brands_owned}</td><td className="px-2 py-1.5">{o.brands_touched}</td><td className="px-2 py-1.5">{o.attempts}</td><td className="px-2 py-1.5">{o.brands_met}</td><td className="px-2 py-1.5">{o.opportunities}</td><td className="px-2 py-1.5">{o.confirmed}</td><td className="px-2 py-1.5">{inr(o.confirmed_value_inr)}</td><td className="px-2 py-1.5">{inr(o.open_pipeline_inr)}</td><td className="px-2 py-1.5">{o.open_tasks}</td><td className="px-2 py-1.5">{o.overdue_tasks || ""}</td></tr>
@@ -101,7 +97,7 @@ export default function Campaigns() {
           <p className="mt-2 text-[11px] text-slate-400">Interaction counts use the interaction owner; opportunities use the latest opportunity owner; brands owned uses the brand owner.</p>
         </Card>
         <Card title="By industry">
-          <Table head={["Industry", "Brands touched", "Met", "Qualified", "Opps", "Confirmed", "Confirmed ₹", "Brand→conf."]}>
+          <Table head={["Industry", "Brands touched", "Met", "Qualified", "Opps", "Confirmed", "Confirmed ₹", "Close rate"]}>
             {d.industries.map((o: any) => (
               <tr key={o.key}><td className="px-2 py-1.5 font-medium">{o.label}</td><td className="px-2 py-1.5">{o.brands_touched}</td><td className="px-2 py-1.5">{o.brands_met}</td><td className="px-2 py-1.5">{o.qualified_brands}</td><td className="px-2 py-1.5">{o.opportunities}</td><td className="px-2 py-1.5">{o.confirmed}</td><td className="px-2 py-1.5">{inr(o.confirmed_value_inr)}</td><td className="px-2 py-1.5">{pct(o.close_rate_brand)}</td></tr>
             ))}

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo, useState } from "react";
 import { useApi, useApp, send } from "@/components/app-context";
-import { Card, Badge, Table, inr, Loading, ErrorBox, Button, Field, inputCls, stageTone, SimTag } from "@/components/ui";
+import { Card, Badge, Table, inr, Loading, ErrorBox, Button, Field, inputCls, selectCls, SimTag, PageHeader, StageBadge, stageLabel, QUAL_LABEL, humanize } from "@/components/ui";
 
 const QT: Record<string, "green" | "blue" | "red" | "slate" | "amber"> = { qualified: "green", engaged: "blue", unqualified: "red", dormant: "amber", unreviewed: "slate" };
 
@@ -17,25 +17,24 @@ export default function Brands() {
   if (!d) return null;
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-end justify-between gap-2">
-        <div><h1 className="text-xl font-semibold">Brands</h1><p className="text-xs text-slate-500">{d.brands.length} brands in research as of {d.as_of}. Qualification = latest version ≤ as-of.</p></div>
-        <div className="flex gap-2">
-          <input placeholder="Search brand, id, industry, owner" value={q} onChange={(e) => setQ(e.target.value)} className={inputCls + " w-64"} />
-          <select value={status} onChange={(e) => setStatus(e.target.value)} className={inputCls}><option value="">All statuses</option>{["qualified", "engaged", "unreviewed", "dormant", "unqualified", "not yet assessed"].map((s) => <option key={s}>{s}</option>)}</select>
-        </div>
-      </div>
+      <PageHeader eyebrow="Act" title="Brands"
+        subtitle={<>{d.brands.length} brands in research as of {d.as_of}. Qualification shows the latest status on or before that date. Click a brand for contacts, deals and history.</>}
+        actions={<>
+          <input placeholder="Search brand, industry or owner" value={q} onChange={(e) => setQ(e.target.value)} className={inputCls + " w-64"} />
+          <select value={status} onChange={(e) => setStatus(e.target.value)} className={selectCls}><option value="">All statuses</option>{["qualified", "engaged", "unreviewed", "dormant", "unqualified", "not yet assessed"].map((s) => <option key={s} value={s}>{QUAL_LABEL[s] ?? s}</option>)}</select>
+        </>} />
       <Card>
-        <Table head={["Brand", "Industry", "Owner", "Qualification", "Source campaign", "Interactions", "Opportunities", "Flags"]}>
+        <Table head={["Brand", "Industry", "Owner", "Qualification", "Source campaign", "Touches", "Deals", "Flags"]} maxHeight="calc(100vh - 230px)">
           {rows.map((b: any) => (
-            <tr key={b.brand_id} onClick={() => setSel(b.brand_id)} className="cursor-pointer hover:bg-indigo-50">
-              <td className="px-2 py-1.5 font-medium">{b.brand_name}<span className="ml-1 text-[11px] text-slate-400">{b.brand_id}</span></td>
+            <tr key={b.brand_id} onClick={() => setSel(b.brand_id)} className="cursor-pointer">
+              <td className="px-2 py-1.5 font-semibold text-slate-900">{b.brand_name}<span className="ml-1.5 text-[11px] font-normal text-slate-400">{b.brand_id}</span></td>
               <td className="px-2 py-1.5 text-xs">{b.industry}</td>
               <td className="px-2 py-1.5 text-xs">{b.owner_name}</td>
-              <td className="px-2 py-1.5"><Badge tone={QT[b.qualification] ?? "slate"}>{b.qualification}</Badge></td>
+              <td className="px-2 py-1.5"><Badge tone={QT[b.qualification] ?? "slate"} dot>{QUAL_LABEL[b.qualification] ?? humanize(b.qualification)}</Badge></td>
               <td className="px-2 py-1.5 text-xs">{b.source_campaign ?? "—"}</td>
               <td className="px-2 py-1.5">{b.interactions}</td>
-              <td className="px-2 py-1.5">{b.opportunity_stages.map((s: string, i: number) => <span key={i} className="mr-1"><Badge tone={stageTone(s)}>{s.replace("_", " ")}</Badge></span>)}</td>
-              <td className="px-2 py-1.5">{b.has_opt_out_contact && <Badge tone="red">contact opted out</Badge>}</td>
+              <td className="px-2 py-1.5">{b.opportunity_stages.map((s: string, i: number) => <span key={i} className="mr-1"><StageBadge s={s} /></span>)}</td>
+              <td className="px-2 py-1.5">{b.has_opt_out_contact && <Badge tone="red">Contact opted out</Badge>}</td>
             </tr>
           ))}
         </Table>
@@ -67,22 +66,22 @@ function BrandDrawer({ id, onClose }: { id: string; onClose: () => void }) {
               <div className="flex gap-2"><Button variant="secondary" onClick={() => ask(`Summarise the relationship with ${b.brand.brand_name} (${b.brand.brand_id}) and recommend the next step.`)}>Ask AI</Button><Button variant="ghost" onClick={onClose}>Close</Button></div>
             </div>
             <Card title="Contacts">
-              <ul className="space-y-1 text-sm">{b.contacts.map((c: any) => <li key={c.contact_id}>{c.contact_name} <span className="text-xs text-slate-500">· {c.job_title} · {c.contact_id}</span> {c.opted_out && <Badge tone="red">opted out (this contact only)</Badge>}</li>)}</ul>
+              <ul className="space-y-1 text-sm">{b.contacts.map((c: any) => <li key={c.contact_id}>{c.contact_name} <span className="text-xs text-slate-500">· {c.job_title} · {c.contact_id}</span> {c.opted_out && <Badge tone="red">Opted out, this contact only</Badge>}</li>)}</ul>
             </Card>
             <Card title="Opportunities">
               {b.opportunities.length === 0 ? <p className="text-sm text-slate-500">None.</p> : b.opportunities.map((o: any) => (
                 <div key={o.opportunity_id} className="mb-2 text-sm">
-                  <div><b>{o.opportunity_id}</b> · {o.campaign} · {o.support_type} · <Badge tone={stageTone(o.stage)}>{o.stage}</Badge> · proposed {inr(o.proposed_value_inr)} {o.confirmed_value_inr ? `· confirmed ${inr(o.confirmed_value_inr)}` : ""}</div>
-                  <div className="mt-0.5 text-[11px] text-slate-500">{o.history.map((h: any) => `${h.at.slice(0, 10)} ${h.stage}`).join(" → ")}</div>
+                  <div><b>{o.opportunity_id}</b> · {o.campaign} · {o.support_type} · <StageBadge s={o.stage} /> · proposed {inr(o.proposed_value_inr)} {o.confirmed_value_inr ? `· confirmed ${inr(o.confirmed_value_inr)}` : ""}</div>
+                  <div className="mt-0.5 text-[11px] text-slate-500">{o.history.map((h: any) => `${h.at.slice(0, 10)} ${stageLabel(h.stage)}`).join("  ›  ")}</div>
                 </div>
               ))}
             </Card>
             {b.payments_simulated.length > 0 && <Card title={<>Payments <SimTag /></>}><ul className="text-xs">{b.payments_simulated.map((p: any) => <li key={p.payment_id}>{p.installment}: {inr(p.amount_inr)} invoiced {p.invoiced_at.slice(0, 10)} · {p.received_as_of ? `received ${p.received_at.slice(0, 10)} (net ${inr(p.net_received_inr)})` : `outstanding, due ${p.due_at.slice(0, 10)}`}</li>)}</ul></Card>}
             {b.activations.length > 0 && <Card title="Activations"><ul className="text-xs">{b.activations.map((a: any) => <li key={a.activation_id}>{a.attendee_campaign_name} (linked {a.linked_at.slice(0, 10)}) — {a.activation_note}</li>)}</ul></Card>}
             <Card title="Qualification history">
-              <ul className="space-y-1 text-xs">{b.qualification_history.map((q: any, i: number) => <li key={i}><Badge tone={QT[q.status] ?? "slate"}>{q.status}</Badge> {q.at.slice(0, 10)} · {q.reason} <span className="text-slate-400">({q.source_campaign})</span></li>)}</ul>
+              <ul className="space-y-1 text-xs">{b.qualification_history.map((q: any, i: number) => <li key={i}><Badge tone={QT[q.status] ?? "slate"}>{QUAL_LABEL[q.status] ?? humanize(q.status)}</Badge> {q.at.slice(0, 10)} · {q.reason} <span className="text-slate-400">({q.source_campaign})</span></li>)}</ul>
               <div className="mt-3 grid grid-cols-3 gap-2 border-t border-slate-100 pt-3">
-                <Field label="New status"><select className={inputCls} value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>{["unreviewed", "engaged", "qualified", "unqualified", "dormant"].map((s) => <option key={s}>{s}</option>)}</select></Field>
+                <Field label="New status"><select className={inputCls} value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}>{["unreviewed", "engaged", "qualified", "unqualified", "dormant"].map((s) => <option key={s} value={s}>{QUAL_LABEL[s]}</option>)}</select></Field>
                 <Field label="Effective date"><input type="date" className={inputCls} value={form.effective_date} onChange={(e) => setForm({ ...form, effective_date: e.target.value })} /></Field>
                 <Field label="Reason"><input className={inputCls} value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} /></Field>
               </div>

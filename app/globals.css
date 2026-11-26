@@ -5,8 +5,37 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Brand palette: navy and blue, matching the strategy deck */
+@theme {
+  --color-navy: #030c5b;
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bcd2ff;
+  --color-brand-300: #8eb2fb;
+  --color-brand-500: #2f6fd6;
+  --color-brand-600: #0053b4;
+  --color-brand-700: #0a4596;
+  --color-brand-800: #0b3577;
+  --color-brand-900: #071f4f;
+}
+
 body {
-  background: #f8fafc;
+  background: #f5f7fb;
   color: #0f172a;
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-feature-settings: "cv11", "ss01";
 }
+
+/* Tables: tabular numbers, comfortable rows, soft zebra */
+.gc-table table { font-variant-numeric: tabular-nums; }
+.gc-table tbody tr:nth-child(even) { background: #fafbfd; }
+.gc-table tbody tr:hover { background: #f1f5ff; }
+.gc-table td { padding-top: 0.6rem; padding-bottom: 0.6rem; vertical-align: top; }
+
+/* Slim, quiet scrollbars */
+* { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.55rem center; padding-right: 1.75rem; }
