@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 
-/** Minimal, safe markdown renderer (no HTML injection): headings, bullets, numbered lists, tables, **bold**, `code`. */
+/** Minimal, safe markdown renderer (no HTML injection): headings, bullets, numbered lists, tables, **bold**, *italic*, `code`. */
 function inline(t: string, key: number): React.ReactNode {
-  const parts = t.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
-  return <React.Fragment key={key}>{parts.map((p, i) => p.startsWith("**") && p.endsWith("**") ? <b key={i}>{p.slice(2, -2)}</b> : p.startsWith("`") && p.endsWith("`") ? <code key={i} className="rounded bg-slate-200 px-1 text-[12px]">{p.slice(1, -1)}</code> : p)}</React.Fragment>;
+  const parts = t.split(/(\*\*[^*]+\*\*|`[^`]+`|\*[^*\s][^*]*\*)/g);
+  return <React.Fragment key={key}>{parts.map((p, i) => p.startsWith("**") && p.endsWith("**") ? <b key={i}>{p.slice(2, -2)}</b> : p.startsWith("`") && p.endsWith("`") ? <code key={i} className="rounded bg-slate-200 px-1 text-[12px]">{p.slice(1, -1)}</code> : p.length > 2 && p.startsWith("*") && p.endsWith("*") ? <i key={i}>{p.slice(1, -1)}</i> : p)}</React.Fragment>;
 }
 
 export function Markdown({ text }: { text: string }) {
