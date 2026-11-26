@@ -2,7 +2,7 @@
 
 **Author:** Bommineedi Manaswitha (Roll No. 23ME10018)
 **Challenge:** B — Sponsorship Growth: maximise sponsorship **cash collected before the festival**
-**Live app:** `<VERCEL_URL>` · **3-slide strategy (PDF):** `Manaswitha_RISA_Sponsorship_Strategy.pdf` · **Copilot eval results:** [scripts/eval-results.md](scripts/eval-results.md)
+**Live app:** **https://risa-growth-center-three.vercel.app** · **Repo:** https://github.com/ykk3008/risa-growth-center · **3-slide strategy (PDF):** `Manaswitha_RISA_Sponsorship_Strategy.pdf` · **Copilot eval results:** [scripts/eval-results.md](scripts/eval-results.md)
 
 > I ran sponsorship sales for a large Indian college fest. The lesson I carried into this case: *a signed deal is not cash*. So the north-star metric is **cash in the bank 14 days before the fest (T-14), net of TDS** — not "confirmed value".
 

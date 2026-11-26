@@ -5,7 +5,7 @@ import { defaultAsOf } from "@/lib/metrics";
 import { TOOL_DECLARATIONS, runTool, type Proposal } from "@/lib/copilot/tools";
 import { systemPrompt } from "@/lib/copilot/prompt";
 
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 // Primary model first; on overload (503/429) fall back down the chain. Once a model answers,
 // the rest of the request sticks to it (tool-call turns are not mixed across models).
@@ -16,7 +16,11 @@ const clip = (x: unknown, n = 24000) => { const s = JSON.stringify(x); return s.
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const BUSY = /429|RESOURCE_EXHAUSTED|503|UNAVAILABLE|overloaded|high demand/i;
+// Overloaded, rate-limited or hung (our own per-call timeout) all mean "try the next model".
+const BUSY = /429|RESOURCE_EXHAUSTED|503|UNAVAILABLE|overloaded|high demand|abort|timed? ?out/i;
+// A fallback candidate gets a short leash (a busy model can hang 45 s+); the model in use gets longer.
+const CANDIDATE_TIMEOUT_MS = 10_000;
+const STICKY_TIMEOUT_MS = 30_000;
 
 // Per-instance memory of overloaded models, so later requests skip straight to one that answers.
 const COOLDOWN_MS = 120_000;
@@ -30,11 +34,15 @@ async function generate(ai: GoogleGenAI, contents: Content[], system: string, st
   for (const model of chain) {
     const sticky = !!state.model;
     // Fallback candidates get one quick try; the model already in use gets patient retries.
-    for (let attempt = 0; attempt < (sticky ? 3 : model === chain[chain.length - 1] ? 2 : 1); attempt++) {
+    const isLast = model === chain[chain.length - 1];
+    for (let attempt = 0; attempt < (sticky ? 3 : isLast ? 2 : 1); attempt++) {
       try {
         const res = await ai.models.generateContent({
           model, contents,
-          config: { systemInstruction: system, tools: [{ functionDeclarations: TOOL_DECLARATIONS as never }], temperature: 0.2 },
+          config: {
+            systemInstruction: system, tools: [{ functionDeclarations: TOOL_DECLARATIONS as never }], temperature: 0.2,
+            abortSignal: AbortSignal.timeout(sticky || isLast ? STICKY_TIMEOUT_MS : CANDIDATE_TIMEOUT_MS),
+          },
         });
         state.model = model;
         busyUntil.delete(model);
@@ -46,7 +54,7 @@ async function generate(ai: GoogleGenAI, contents: Content[], system: string, st
         if (!BUSY.test(msg) && !notFound) throw e;
         if (!sticky) busyUntil.set(model, Date.now() + (notFound ? 24 * 3600_000 : COOLDOWN_MS));
         if (notFound) break;
-        if (!sticky && model !== chain[chain.length - 1]) break;
+        if (!sticky && !isLast) break;
         await new Promise((r) => setTimeout(r, 1200 * (attempt + 1)));
       }
     }
@@ -68,7 +76,9 @@ export async function POST(req: Request) {
     const system = systemPrompt(db, asOf);
     let reply = "";
     const state: { model?: string } = {};
+    const deadline = Date.now() + 95_000;
     for (let round = 0; round < MAX_ROUNDS; round++) {
+      if (round > 0 && Date.now() > deadline) { reply = "The model is slow right now, so I stopped before finishing. The evidence trace below shows what I gathered; please ask again or narrow the question."; break; }
       const res = await generate(ai, contents, system, state);
       const calls = res.functionCalls ?? [];
       const content = res.candidates?.[0]?.content;
