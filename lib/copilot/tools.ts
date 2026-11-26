@@ -152,7 +152,13 @@ export function runTool(db: DB, name: string, args: Json, defaultAsOf: string): 
       const s = S();
       const rows = opportunityList(s, { stage: args.stage as string, campaign: args.campaign as string, owner: args.owner as string, support_type: args.support_type as string, brand: args.brand as string, open_only: args.open_only as boolean, min_value: args.min_value as number });
       const lim = Math.min(Number(args.limit ?? 60), 100);
-      return { result: { as_of: s.asOf, count: rows.length, total_proposed_inr: rows.reduce((a, r) => a + r.proposed_value_inr, 0), total_confirmed_inr: rows.reduce((a, r) => a + r.confirmed_value_inr, 0), rows: rows.slice(0, lim), truncated: rows.length > lim } };
+      const by_stage: Record<string, { count: number; proposed_inr: number; confirmed_inr: number }> = {};
+      for (const r of rows) {
+        const b = (by_stage[r.stage] ??= { count: 0, proposed_inr: 0, confirmed_inr: 0 });
+        b.count++; b.proposed_inr += r.proposed_value_inr; b.confirmed_inr += r.confirmed_value_inr;
+      }
+      return { result: { as_of: s.asOf, count: rows.length, total_proposed_inr: rows.reduce((a, r) => a + r.proposed_value_inr, 0), total_confirmed_inr: rows.reduce((a, r) => a + r.confirmed_value_inr, 0),
+        by_stage, totals_note: "Quote count/total/by_stage figures exactly; never add row values by hand (use calculate for any other sum).", rows: rows.slice(0, lim), truncated: rows.length > lim } };
     }
     case "get_brand": {
       const s = S();
