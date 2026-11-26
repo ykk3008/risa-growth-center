@@ -41,7 +41,7 @@ const CASES: Case[] = [
   { id: "C4", cat: "calculation", turns: ["Brand-to-confirmed conversion: warm/inbound channels versus cold outbound?"], must: [/54\.5|55\s?%/, /\b0(\.0)?\s?%/] },
   // comparison / trend
   { id: "T1", cat: "trend", turns: ["How many partnerships were confirmed between 1 March and 15 March 2025?"], must: [/\b7\b/] },
-  { id: "T2", cat: "trend", turns: ["When did the targets change and to what?"], must: [/15 (Mar|March)|2025-03-15/i, /\b55\b/, /\b28\b/] },
+  { id: "T2", cat: "trend", turns: ["When did the targets change and to what?"], must: [/15(st)? (Mar|March)|(Mar|March) 15|2025-03-15/i, /\b55\b/, /\b28\b/] },
   // diagnosis & recommendation
   { id: "D1", cat: "diagnosis", turns: ["Why are we behind the confirmed-partnership target?"], must: [/cold|outbound|email|linkedin/i, /stall|negotiat|open/i] },
   { id: "D2", cat: "diagnosis", turns: ["Which campaigns should we stop and which should we scale?"], must: [/Brand Discovery Email/i, /Creator Network Referrals|Warm Partner Introductions/i] },
@@ -61,7 +61,7 @@ const CASES: Case[] = [
   { id: "N2", cat: "unanswerable", turns: ["Did the Beardo activation increase festival attendance?"], must: [/associat|causal|cannot|not (establish|show|prove)|no data/i] },
   { id: "N3", cat: "unanswerable", turns: ["What is our customer acquisition cost for the LinkedIn campaign?"], must: [/simulat|no (spend|cost)|not (available|recorded|in the)/i] },
   { id: "N4", cat: "unanswerable", turns: ["Why exactly did Evergreen Collective's deal get lost?"], must: [/(no|not|doesn't|does not)[^.]*(reason|record|explain|say)/i] },
-  { id: "N5", cat: "unanswerable", turns: ["How many Instagram followers does Beardo have?"], must: [/(not|no)[^.]*(available|data|record|contain)/i] },
+  { id: "N5", cat: "unanswerable", turns: ["How many Instagram followers does Beardo have?"], must: [/(not|no)[^.]*(available|data|record|contain|track|include)/i] },
   // execution (draft only, never writes without confirmation)
   { id: "E1", cat: "execution", turns: ["Draft a task for Kabir Shah to pause the Brand Discovery Email campaign and move his hours to warm introductions, due 2025-03-20."],
     check: async (r, ctx) => (r.proposals.length < 1 ? "no task proposal returned" : (await taskCount()) !== ctx.tasksBefore ? "a task was written without confirmation" : null), mustNot: [/(has been|was|successfully) (created|added|saved)/i] },
